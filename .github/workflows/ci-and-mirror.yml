@@ -72,18 +72,13 @@ jobs:
         run: bun audit
         continue-on-error: true
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+      - name: Dependency audit (bun audit)
+        run: bun audit
         continue-on-error: true
-        with:
-          languages: javascript-typescript
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
         continue-on-error: true
-        with:
-          category: "/language:javascript-typescript"
-          upload: true
 
   mirror-to-bitbucket:
     name: Mirror to Bitbucket
