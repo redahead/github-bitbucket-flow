@@ -9,14 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as PromoWillkommensbonusRouteImport } from './routes/promo.willkommensbonus'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PromoWillkommensbonusRoute = PromoWillkommensbonusRouteImport.update({
   id: '/promo/willkommensbonus',
   path: '/promo/willkommensbonus',
@@ -24,40 +18,29 @@ const PromoWillkommensbonusRoute = PromoWillkommensbonusRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/promo/willkommensbonus'
+  fullPaths: '/promo/willkommensbonus'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/promo/willkommensbonus'
-  id: '__root__' | '/' | '/promo/willkommensbonus'
+  to: '/promo/willkommensbonus'
+  id: '__root__' | '/promo/willkommensbonus'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   PromoWillkommensbonusRoute: typeof PromoWillkommensbonusRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/promo/willkommensbonus': {
       id: '/promo/willkommensbonus'
       path: '/promo/willkommensbonus'
@@ -69,7 +52,6 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   PromoWillkommensbonusRoute: PromoWillkommensbonusRoute,
 }
 export const routeTree = rootRouteImport
