@@ -1,10 +1,9 @@
 [build]
   command = "NITRO_PRESET=netlify bun run build"
-  publish = "dist/client"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
 
-# TanStack Start builds an SSR server via Nitro. The `netlify` preset emits
-# a Netlify Function that Netlify auto-detects from `.netlify/functions-internal`.
-# `dist/client` holds the static assets; SSR requests fall through to the function.
+# TanStack Start builds SSR via Nitro. The `netlify` preset emits static assets
+# into `dist/` and a Netlify Function into `.netlify/functions-internal/`.
