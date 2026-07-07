@@ -84,7 +84,7 @@ jobs:
 
   mirror-to-bitbucket:
     name: Mirror to Bitbucket
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     needs: [ci, security]
     runs-on: ubuntu-latest
     permissions:
