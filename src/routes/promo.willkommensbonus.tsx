@@ -5,7 +5,7 @@ import { PaymentLogos } from "@/components/registration/PaymentLogos";
 import { useEffect, useState } from "react";
 import ligaportalHeroCroppedAsset from "@/assets/ligaportal-hero-cropped.webp.asset.json";
 
-export const Route = createFileRoute("/promo/willkommensbonus")({
+export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "500% Quotenboost + 100€ Bonus – Willkommenspaket | bet-at-home" },
