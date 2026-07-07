@@ -117,7 +117,7 @@ function PromoWillkommensbonus() {
               transition={{ delay: 0.05 }}
               className="mt-4 text-[36px] font-extrabold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              <span className="text-brand">500% Quotenboost</span>
+              <span className="text-brand">200% Quotenboost</span>
               {"\u00a0"}
               <br />+ 100€ Bonus
             </motion.h1>
