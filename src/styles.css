@@ -88,7 +88,7 @@
   --ring: oklch(0.704 0.04 256.788);
   --brand: oklch(0.82 0.22 125);
   --brand-foreground: #002053;
-  --success: #7EC717;
+  --success: #7ec717;
   --success-foreground: oklch(0.15 0.01 260);
   --shadow-cta: 0 8px 24px -8px oklch(0.82 0.22 125 / 0.55);
   --chart-1: oklch(0.646 0.222 41.116);
