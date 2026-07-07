@@ -20,9 +20,7 @@ function TestPage() {
       <p className="text-muted-foreground">
         Wenn diese Seite in Bitbucket ankommt, funktioniert der Mirror.
       </p>
-      <p className="text-sm text-muted-foreground">
-        Commit-Test: {new Date().toISOString()}
-      </p>
+      <p className="text-sm text-muted-foreground">Commit-Test: 2026-07-07</p>
     </div>
   );
 }
