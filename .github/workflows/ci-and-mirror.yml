@@ -83,6 +83,7 @@ jobs:
         continue-on-error: true
         with:
           category: "/language:javascript-typescript"
+          upload: true
 
   mirror-to-bitbucket:
     name: Mirror to Bitbucket
