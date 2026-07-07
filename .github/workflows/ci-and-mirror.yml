@@ -108,5 +108,5 @@ jobs:
           BITBUCKET_REPO_URL: ${{ secrets.BITBUCKET_REPO_URL }}
         run: |
           git remote add bitbucket "$BITBUCKET_REPO_URL"
-          git push bitbucket main --force-with-lease
+          git push bitbucket main --force
           git push bitbucket --tags
