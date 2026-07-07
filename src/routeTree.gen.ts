@@ -10,43 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PromoWillkommensbonusRouteImport } from './routes/promo.willkommensbonus'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PromoWillkommensbonusRoute = PromoWillkommensbonusRouteImport.update({
-  id: '/promo/willkommensbonus',
-  path: '/promo/willkommensbonus',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/promo/willkommensbonus'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/promo/willkommensbonus'
-  id: '__root__' | '/' | '/promo/willkommensbonus'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PromoWillkommensbonusRoute: typeof PromoWillkommensbonusRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,19 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/promo/willkommensbonus': {
-      id: '/promo/willkommensbonus'
-      path: '/promo/willkommensbonus'
-      fullPath: '/promo/willkommensbonus'
-      preLoaderRoute: typeof PromoWillkommensbonusRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PromoWillkommensbonusRoute: PromoWillkommensbonusRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
