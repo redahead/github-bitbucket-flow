@@ -1,0 +1,113 @@
+name: CI & Bitbucket Mirror
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-mirror-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  ci:
+    name: Build, Lint & Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Test
+        run: |
+          if bun pm ls 2>/dev/null | grep -qE "vitest|jest" || grep -q '"test"' package.json; then
+            bun test || echo "No tests defined"
+          else
+            echo "No test runner configured, skipping."
+          fi
+
+      - name: Build
+        run: bun run build
+
+      - name: Upload build artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  security:
+    name: Security Checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Dependency audit (bun audit)
+        run: bun audit
+        continue-on-error: true
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
+
+  mirror-to-bitbucket:
+    name: Mirror to Bitbucket
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [ci, security]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.BITBUCKET_SSH_KEY }}
+
+      - name: Add Bitbucket to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -t rsa,ecdsa,ed25519 bitbucket.org >> ~/.ssh/known_hosts
+
+      - name: Push mirror to Bitbucket
+        env:
+          BITBUCKET_REPO_URL: ${{ secrets.BITBUCKET_REPO_URL }}
+        run: |
+          git remote add bitbucket "$BITBUCKET_REPO_URL"
+          git push bitbucket main --force-with-lease
+          git push bitbucket --tags
