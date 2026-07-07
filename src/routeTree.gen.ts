@@ -9,51 +9,61 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PromoWillkommensbonusRouteImport } from './routes/promo.willkommensbonus'
+import { Route as IndexRouteImport } from './routes/index'
 
-const PromoWillkommensbonusRoute = PromoWillkommensbonusRouteImport.update({
-  id: '/promo/willkommensbonus',
-  path: '/promo/willkommensbonus',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
+  '/': typeof IndexRoute
 }
 export interface FileRoutesByTo {
-  '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
+  '/': typeof IndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/promo/willkommensbonus': typeof PromoWillkommensbonusRoute
+  '/': typeof IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/promo/willkommensbonus'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/promo/willkommensbonus'
-  id: '__root__' | '/promo/willkommensbonus'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  PromoWillkommensbonusRoute: typeof PromoWillkommensbonusRoute
+  IndexRoute: typeof IndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/promo/willkommensbonus': {
-      id: '/promo/willkommensbonus'
-      path: '/promo/willkommensbonus'
-      fullPath: '/promo/willkommensbonus'
-      preLoaderRoute: typeof PromoWillkommensbonusRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  PromoWillkommensbonusRoute: PromoWillkommensbonusRoute,
+  IndexRoute: IndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
