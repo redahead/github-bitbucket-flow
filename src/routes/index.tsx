@@ -1,24 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-4 text-center">
+      <h1 className="text-3xl font-bold text-foreground">Mirror-Test</h1>
+      <p className="text-muted-foreground">
+        Wenn diese Seite in Bitbucket ankommt, funktioniert der Mirror.
+      </p>
+      <p className="text-sm text-muted-foreground">Commit-Test: 2026-07-07</p>
     </div>
   );
 }
