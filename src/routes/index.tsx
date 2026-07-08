@@ -8,17 +8,17 @@ import ligaportalHeroCroppedAsset from "@/assets/ligaportal-hero-cropped.webp.as
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "500% Quotenboost + 100€ Bonus – Willkommenspaket | bet-at-home" },
+      { title: "200% Quotenboost + 100€ Bonus – Willkommenspaket | bet-at-home" },
       {
         name: "description",
         content:
-          "Sichere dir dein Startguthaben: 500% Quotenboost + bis zu 100 € Bonus. Wähle deine Wette und zünde den Boost im Wettschein.",
+          "Sichere dir dein Startguthaben: 200% Quotenboost + bis zu 100 € Bonus. Wähle deine Wette und zünde den Boost im Wettschein.",
       },
-      { property: "og:title", content: "500% Quotenboost + 100€ Bonus – Willkommenspaket" },
+      { property: "og:title", content: "200% Quotenboost + 100€ Bonus – Willkommenspaket" },
       {
         property: "og:description",
         content:
-          "500% Quotenboost + bis zu 100 € Bonus. Wähle deine Wette und aktiviere den Boost im Wettschein.",
+          "200% Quotenboost + bis zu 100 € Bonus. Wähle deine Wette und aktiviere den Boost im Wettschein.",
       },
     ],
   }),
@@ -117,7 +117,7 @@ function PromoWillkommensbonus() {
               transition={{ delay: 0.05 }}
               className="mt-4 text-[36px] font-extrabold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              <span className="text-brand">500% Quotenboost</span>
+              <span className="text-brand">200% Quotenboost</span>
               {"\u00a0"}
               <br />+ 100€ Bonus
             </motion.h1>
@@ -221,7 +221,7 @@ function PromoWillkommensbonus() {
               className="mt-6 rounded-3xl border border-white/15 bg-white/[0.06] p-4 backdrop-blur sm:p-5 md:mt-0"
             >
               <div className="flex items-center justify-between text-[11px] uppercase tracking-wider text-white/70">
-                <span>So funktioniert der 500% Welcome Boost</span>
+                <span>So funktioniert der 200% Welcome Boost</span>
               </div>
               <p className="mt-2 text-sm text-white/80">
                 Wähle deine Wette und aktiviere den Boost im Wettschein.
@@ -243,7 +243,7 @@ function PromoWillkommensbonus() {
                   </span>
                   <span className="mt-1 text-sm font-bold text-white">2. Boost zünden</span>
                   <span className="text-[11px] leading-snug text-white/70">
-                    Aktiviere im Wettschein einfach den „500% WELCOME BOOST" für massiv höhere
+                    Aktiviere im Wettschein einfach den „200% WELCOME BOOST" für massiv höhere
                     Gewinne.
                   </span>
                 </div>
